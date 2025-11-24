@@ -35,11 +35,11 @@
     <section>
       <div class="text">
         <h2 style="font-size: 2em;">Put Something in the Box 📥</h2>
-        <p style="font-size: 1.3em;">Let's create a variable called <code style="font-size: 1.1em; background-color: var(--purple-100); padding: 0.2em 0.4em; border-radius: 0.3em;">x</code> and store a number inside it!</p>
+        <p style="font-size: 1.5em;">Let's create a variable called <code style="font-size: 1.1em; background-color: var(--purple-100); padding: 0.2em 0.4em; border-radius: 0.3em;">x</code> and store a number inside it!</p>
       </div>
       <div class="widget" id="store-widget">
         <div style="background-color: white; border: 0.2em solid var(--neutral-100); border-radius: 0.4em; padding: 2em; text-align: center;">
-          <p style="margin-bottom: 1em; font-size: 1.2em;"><strong>What number do you want to put in the box?</strong></p>
+          <p style="margin-bottom: 1em; font-size: 1.3em;"><strong>What number do you want to put in the box?</strong></p>
           <input type="number" id="number-input" placeholder="Enter a number" style="padding: 0.5em; font-size: 1.2em; border: 0.2em solid var(--neutral-300); border-radius: 0.4em; width: 200px; text-align: center; font-family: 'Poppins', sans-serif;">
           <button id="store-button" class="button-semantic button-primary" style="margin-left: 0.5em; padding: 0.5em 1.5em; font-size: 1.2em;">Store It!</button>
           <div id="variable-display" style="margin-top: 2em; padding: 1.5em; background-color: var(--purple-50); border: 0.2em solid var(--purple-300); border-radius: 0.4em; display: none;">
@@ -56,7 +56,7 @@
     <section>
       <div class="text">
         <h2 style="font-size: 2em;">Change What's Inside 🔄</h2>
-        <p style="font-size: 1.3em;">Let's change the value stored in <code style="font-size: 1.1em; background-color: var(--teal-100); padding: 0.2em 0.4em; border-radius: 0.3em;">x</code>!</p>
+        <p style="font-size: 1.5em;">Let's change the value stored in <code style="font-size: 1.1em; background-color: var(--teal-100); padding: 0.2em 0.4em; border-radius: 0.3em;">x</code>!</p>
       </div>
       <div class="widget" id="change-widget">
         <div style="background-color: white; border: 0.2em solid var(--neutral-100); border-radius: 0.4em; padding: 2em; text-align: center;">
@@ -64,7 +64,7 @@
             <p style="margin: 0; font-size: 1.5em;">📦</p>
             <p style="margin: 0.5em 0 0 0; font-size: 1.5em;"><code style="background-color: var(--teal-100); padding: 0.3em 0.6em; border-radius: 0.3em;">x = <span id="current-value" style="color: var(--teal-600); font-weight: 600; font-size: 1.2em;">0</span></code></p>
           </div>
-          <p style="margin-bottom: 1em; font-size: 1.2em;"><strong>Add or subtract from x:</strong></p>
+          <p style="margin-bottom: 1em; font-size: 1.3em;"><strong>Add or subtract from x:</strong></p>
           <div style="display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;">
             <button class="button-semantic button-primary change-btn" data-change="-10" style="font-size: 1.2em; padding: 0.6em 1.2em;">- 10</button>
             <button class="button-semantic button-primary change-btn" data-change="-1" style="font-size: 1.2em; padding: 0.6em 1.2em;">- 1</button>
@@ -94,7 +94,49 @@
     import { WidgetPage } from "../js/WidgetPage.js";
 
     document.addEventListener("DOMContentLoaded", () => {
-      const widgetPage = new WidgetPage("widget-page-template", document.body);
+      const widgetPage = new WidgetPage("unboxing-variables", document.body);
+
+      let x = 0;
+
+      const numberInput = document.getElementById('number-input');
+      const storeButton = document.getElementById('store-button');
+      const variableDisplay = document.getElementById('variable-display');
+      const storedValueSpan = document.getElementById('stored-value');
+      const continue2Button = document.getElementById('continue-2');
+
+      storeButton.addEventListener('click', () => {
+      const value = parseInt(numberInput.value);
+      if (!isNaN(value)) {
+        x = value;
+        storedValueSpan.textContent = value;
+        variableDisplay.style.display = 'block';
+        widgetPage.playCorrectSound();
+        widgetPage.celebrate();
+        continue2Button.style.display = 'inline-flex';
+        document.getElementById('current-value').textContent = value;
+      } else {
+        widgetPage.playIncorrectSound();
+        alert('Please enter a valid number!');
+      }
+    });
+
+    const currentValueSpan = document.getElementById('current-value');
+    const changeButtons = document.querySelectorAll('.change-btn');
+
+    changeButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const change = parseInt(button.getAttribute('data-change'));
+        x += change;
+        currentValueSpan.textContent = x;
+        widgetPage.playActionSound();
+        currentValueSpan.style.transform = 'scale(1.3)';
+        currentValueSpan.style.transition = 'transform 0.2s ease';
+        setTimeout(() => { currentValueSpan.style.transform = 'scale(1)'; }, 200);
+      });
+    });
+
+
+
     });
   </script>
 </body>
