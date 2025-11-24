@@ -31,7 +31,27 @@
       <button class="button-semantic button-primary button-continue" style="font-size: 1.3em; padding: 0.6em 1.8em;">Continue →</button>
     </section>
 
-    
+    <!-- Storing Values -->
+    <section>
+      <div class="text">
+        <h2 style="font-size: 2em;">Put Something in the Box 📥</h2>
+        <p style="font-size: 1.3em;">Let's create a variable called <code style="font-size: 1.1em; background-color: var(--purple-100); padding: 0.2em 0.4em; border-radius: 0.3em;">x</code> and store a number inside it!</p>
+      </div>
+      <div class="widget" id="store-widget">
+        <div style="background-color: white; border: 0.2em solid var(--neutral-100); border-radius: 0.4em; padding: 2em; text-align: center;">
+          <p style="margin-bottom: 1em; font-size: 1.2em;"><strong>What number do you want to put in the box?</strong></p>
+          <input type="number" id="number-input" placeholder="Enter a number" style="padding: 0.5em; font-size: 1.2em; border: 0.2em solid var(--neutral-300); border-radius: 0.4em; width: 200px; text-align: center; font-family: 'Poppins', sans-serif;">
+          <button id="store-button" class="button-semantic button-primary" style="margin-left: 0.5em; padding: 0.5em 1.5em; font-size: 1.2em;">Store It!</button>
+          <div id="variable-display" style="margin-top: 2em; padding: 1.5em; background-color: var(--purple-50); border: 0.2em solid var(--purple-300); border-radius: 0.4em; display: none;">
+            <p style="margin: 0; font-size: 1.5em;">📦</p>
+            <p style="margin: 0.5em 0 0 0; font-size: 1.3em;"><code style="background-color: var(--purple-100); padding: 0.3em 0.6em; border-radius: 0.3em;">x = <span id="stored-value" style="color: var(--purple-600); font-weight: 600;">?</span></code></p>
+          </div>
+        </div>
+      </div>
+      <button class="button-semantic button-primary button-continue" style="display: none; font-size: 1.3em; padding: 0.6em 1.8em;" id="continue-2">Continue →</button>
+    </section>
+
+
 
 
   </div>
